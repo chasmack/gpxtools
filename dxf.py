@@ -153,15 +153,22 @@ if __name__ == '__main__':
     from gpx import gpx_write, gpx_read
 
     GPX_FILE =  'data/gpsmap.gpx'
-    DXF_FILE = 'data/gpxmap.dxf'
-    PTS_FILE = 'data/gpxmap.txt'
+    DXF_FILE = 'data/gpsmap.dxf'
+    PTS_FILE = 'data/gpsmap.txt'
 
     geom = []
     if (GPX_FILE):
-        geom += gpx_read(GPX_FILE, 2225)
-    if geom:
+        print('Reading GPX file "%s": ' % (GPX_FILE), end='')
+        geom += gpx_read(GPX_FILE, 2229)
+        print('%2d objects' % (len(geom)))
+        
+        print('Writing DXF file "%s": ' % (DXF_FILE), end='')
         dxf_write(geom, DXF_FILE)
+        print('%2d objects' % len(list(g for g in geom if g['geom'].GetGeometryName() == 'LINESTRING')))
+        
+        print('Writing PTS file "%s": ' % (PTS_FILE), end='')
         pnezd_write(geom, PTS_FILE)
+        print('%2d objects' % len(list(g for g in geom if g['geom'].GetGeometryName() == 'POINT')))
 
     exit(0)
 

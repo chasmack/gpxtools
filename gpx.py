@@ -190,7 +190,7 @@ def gpx_read(filename, srid=None):
 
 if __name__ == '__main__':
 
-    GPX_FILE = 'data/gpsmap64.gpx'
+    GPX_FILE = 'data/gpsmap.gpx'
 
     geom = gpx_read(GPX_FILE, 2229)
 
